@@ -11,6 +11,10 @@ public class Movement : MonoBehaviour
     [SerializeField] public const int hSPEED = 2;
     [SerializeField] public const int vSPEED = 1;
 
+    private double LL = -5;
+    private double RL = 5;
+    private double UL = 1;
+    private double DL = -4;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,16 +33,16 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         //border limit (background)
-        if (horizontalMove < 0 && transform.position.x > 3) 
+        if (horizontalMove < 0 && transform.position.x < LL) //moveleft
             horizontalMove = 0;
-        else if (horizontalMove > 0 && transform.position.x < -3)
+        else if (horizontalMove > 0 && transform.position.x > RL) //moveright
             horizontalMove = 0;
-        if (verticalMove < 0 && transform.position.y > 1)
+        if (verticalMove > 0 && transform.position.y > UL) //moveup
             verticalMove = 0;
-        else if (verticalMove > 0 && transform.position.y < -1)
+        else if (verticalMove < 0 && transform.position.y < DL) //movedown
             verticalMove = 0;
 
         //movement (background)
-        rigid.velocity = new Vector2(horizontalMove * hSPEED * -1, verticalMove * vSPEED * -1);
+        rigid.velocity = new Vector2(horizontalMove * hSPEED * 1, verticalMove * vSPEED * 1);
     }
 }

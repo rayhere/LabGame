@@ -25,6 +25,9 @@ public class ButtonFunctions : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene("level1");
+        //https://forum.unity.com/threads/animation-doesnt-play-after-loading-the-scene.1000402/
+        //Animation doesn't play after loading the scene!
+        Time.timeScale = 1;
     }
 
     public void MainMenu()
