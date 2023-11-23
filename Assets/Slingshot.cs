@@ -18,6 +18,9 @@ public class Slingshot : MonoBehaviour
 
     [SerializeField] Vector3 centerPos;
 
+    //add shooting sound
+    [SerializeField] AudioSource audio;
+
     private LineRenderer _lineRenderer;
     public GameObject _newBall;
     private Camera mainCamLocal;
@@ -32,6 +35,12 @@ public class Slingshot : MonoBehaviour
         rubberPower = rPower;
         Debug.Log("rigid.position.x: " + rigid.position.x);
         Debug.Log("rigid.position.y: " + rigid.position.y);
+
+        //add shooting sound
+        if (audio == null)
+        {
+            audio = GetComponent<AudioSource>();
+        }
     }
 
     // Update is called once per frame
@@ -172,6 +181,11 @@ public class Slingshot : MonoBehaviour
             _newBall = null;
             shootingFire = false;
 
+            //2. play sound effect
+            AudioSource.PlayClipAtPoint(audio.clip, transform.position);
+
+
+            //reset lineRender position
             _lineRenderer.positionCount = 2;
         }
 
