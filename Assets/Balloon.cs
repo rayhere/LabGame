@@ -9,12 +9,20 @@ public class Balloon : MonoBehaviour
     //[SerializeField] int popped;
     [SerializeField] public GameObject thisBalloon;
 
+    [SerializeField] public GameObject gameController; 
+
     [SerializeField] Animator animator;
 
+    [SerializeField] AudioSource audio;
+
+    
     const int UNPOPPED = 0;
     const int POPPED = 1;
-    private float timer = .5f;
-    private bool canDestory = false;
+    public float timer = .5f;
+    public bool canDestory = false;
+    public float ttime;
+    public Vector3 maxScale;
+    public bool collisionTriggered = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +40,58 @@ public class Balloon : MonoBehaviour
         //    animator = GetComponent<Animator>();
         animator = GetComponent<Animator>();
         animator.SetInteger("popped", UNPOPPED);
+
+        maxScale = new Vector3 (thisBalloon.transform.localScale.x * 2, thisBalloon.transform.localScale.y * 2, thisBalloon.transform.localScale.z * 2);
+
+        if (audio == null)
+        {
+            audio = GetComponent<AudioSource>();
+        }
+        if (gameController == null)
+        {
+            gameController = GameObject.FindGameObjectWithTag("GameController");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        ttime = Time.time;
         if (canDestory && timer < Time.time)
+        {
             Destroy(gameObject);
+        }
+        else if (!canDestory)
+        {
+            BalloonMovement();
+            if (maxScale.x > thisBalloon.transform.localScale.x)
+            {
+                BalloonScale();
+            }
+            else
+            {
+                //target not collision Triggered, go explosion
+                canDestory = true;
+                animator.SetInteger("popped", POPPED);
+                //2. play sound effect
+                AudioSource.PlayClipAtPoint(audio.clip, transform.position);
+                timer += Time.time;
+            }
+        }
+            
+        
+        // BalloonMovement();
+        // if (maxScale.x > thisBalloon.transform.localScale.x)
+        // {
+        //     BalloonScale();
+        // }
+        // else
+        // {
+        //     canDestory = true;
+        //     animator.SetInteger("popped", POPPED);
+        //     timer += Time.time;
+        // }
+        
     }
 
     void OnTriggerEnter(Collider collision)
@@ -59,17 +112,101 @@ public class Balloon : MonoBehaviour
         //3. destroy coin
         //Destroy(gameObject);
 
-        animator.SetInteger("popped", POPPED);
-        Debug.Log("Popped: " + POPPED);
 
-        Debug.Log("timer: " + timer);
-        Debug.Log("deltaTime: " + Time.deltaTime);
-        Debug.Log("time: " + Time.time);
+        //Detecting Collisions with a certain tag
+
+        //Check for a match with the specific tag on any GameObject that collides with your GameObject
+        if (collision.gameObject.tag == "MyBullet")
+        {
+            //If the GameObject has the same tag as specified, output this message in the console
+            if (!canDestory)
+            {
+                animator.SetInteger("popped", POPPED);
+                Debug.Log("Popped: " + POPPED);
+
+                Debug.Log("timer: " + timer);
+                Debug.Log("deltaTime: " + Time.deltaTime);
+                Debug.Log("Time.time: " + Time.time);
+            
+                timer += Time.time;
+
+                Debug.Log("new timer: " + timer);
+
+                //2. play sound effect
+                AudioSource.PlayClipAtPoint(audio.clip, transform.position);
+
+                //audio.Play() -- this will work but won't work if coin gets destroyed before audio is played.
+
+                canDestory = true;
+                //collisionTriggered = true;
+
+                // increase score
+                gameController.GetComponent<ScoreKeeper>().AddPoints();
+            }
+            Debug.Log("MyBullet collision detected");
+        }
+        else
+        {
+            // if (!canDestory)
+            // {
+            //     animator.SetInteger("popped", POPPED);
+            //     Debug.Log("Popped: " + POPPED);
+
+            //     Debug.Log("timer: " + timer);
+            //     Debug.Log("deltaTime: " + Time.deltaTime);
+            //     Debug.Log("Time.time: " + Time.time);
+            
+            //     timer += Time.time;
+
+            //     Debug.Log("new timer: " + timer);
+
+            //     canDestory = true;
+            // }
+            Debug.Log("collision detected");
+        }
+
+        // if (!canDestory)
+        // {
+        //     animator.SetInteger("popped", POPPED);
+        //     Debug.Log("Popped: " + POPPED);
+
+        //     Debug.Log("timer: " + timer);
+        //     Debug.Log("deltaTime: " + Time.deltaTime);
+        //     Debug.Log("Time.time: " + Time.time);
+            
+        //     timer += Time.time;
+
+        //     Debug.Log("new timer: " + timer);
+
+        //     canDestory = true;
+        // }
+
+        // animator.SetInteger("popped", POPPED);
+        // Debug.Log("Popped: " + POPPED);
+
+        // Debug.Log("timer: " + timer);
+        // Debug.Log("deltaTime: " + Time.deltaTime);
+        // Debug.Log("Time.time: " + Time.time);
         
-        timer += Time.time;
+        // timer += Time.time;
 
-        Debug.Log("new timer: " + timer);
+        // Debug.Log("new timer: " + timer);
 
-        canDestory = true;
+        // canDestory = true;
+    }
+
+    void BalloonMovement()
+    {
+        // Vector3 position = new Vector3(Random.Range(xMin1, xMax1),Random.Range(yMin1,yMax1), 190);
+        //     if (position.y < 1.2 && position.x < -7)
+        //         position.x +=1;
+        //     if (position.y < 1.2 && position.x > 7)
+        //         position.x -=1;
+            
+    }
+
+    void BalloonScale()
+    {
+        thisBalloon.transform.localScale += new Vector3 (0.0001f, 0.0001f, 0.0001f);
     }
 }

@@ -79,7 +79,7 @@ public class Slingshot : MonoBehaviour
             _newBall.transform.position = new Vector3(worldPosition.x, worldPosition.y + .2f, -5.8f);
 
             _lineRenderer.SetPosition(1, centerPos);
-            Debug.Log("clicked");
+            //Debug.Log("clicked");
         }
 
         if (Input.GetMouseButton(0) && _newBall)
@@ -99,7 +99,7 @@ public class Slingshot : MonoBehaviour
             {
                 _lineRenderer.positionCount = 2;
                 Destroy(_newBall);
-                Debug.Log("reset");
+                Debug.Log("reset _LineRenderer");
             }
             
         }
@@ -138,22 +138,35 @@ public class Slingshot : MonoBehaviour
             _lineRenderer.SetPosition(1, newPos);
 
             _newBall.GetComponent<Rigidbody>().isKinematic = false;
-            _newBall.GetComponent<Rigidbody>().AddForce(_newBall.transform.forward * 1000);
+            _newBall.GetComponent<Rigidbody>().AddForce(_newBall.transform.forward * 500);
 
             //_newBall.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * 10;
 
-            float titledUpAngle = (TransPoint1.position.y + TransPoint2.position.y) / 2;
+            float titledUpAngle2 = (TransPoint1.position.y + TransPoint2.position.y) / 2;
+            float titledUpAngle = ((TransPoint1.position.y + TransPoint2.position.y) / 2);
             float Angle2 = _lineRenderer.GetPosition(1).y;
+            float rubberCenterPosY = _lineRenderer.GetPosition(1).y;
+            titledUpAngle += Mathf.Abs(rubberCenterPosY);
+            // if (rubberCenterPosY <= 0)
+            // {
+            //     titledUpAngle += Mathf.Abs(rubberCenterPosY);
+            // }
+            // else
+            // {
+            //     titledUpAngle += Mathf.Abs(rubberCenterPosY);
+            // }
             
             //_newBall.GetComponent<Rigidbody>().AddForce(_newBall.up * Mathf.Abs(titledUpAngle) * 100);
 
-            _newBall.GetComponent<Rigidbody>().AddForce(new Vector2(0, -(Angle2) * 200f));
+            //_newBall.GetComponent<Rigidbody>().AddForce(new Vector2(0, -(Angle2) * 200f));
+
+            _newBall.GetComponent<Rigidbody>().AddForce(new Vector2(0, 500f + (titledUpAngle) * 200f));
 
             //left right
             float wideAngle = ((rigid.position.x - _lineRenderer.GetPosition(1).x));
             _newBall.GetComponent<Rigidbody>().AddForce(new Vector2( (wideAngle) * 400f, 0));
             Debug.Log("newPosx: " + newPos.x);
-            Debug.Log("titledUpAngle: " + titledUpAngle);
+            Debug.Log("titledUpAngle2: " + titledUpAngle2);
             FindObjectOfType<Bullet>().UpdateAngle(Angle2);
             FindObjectOfType<Bullet>().UpdateShooted(true);
             _newBall = null;

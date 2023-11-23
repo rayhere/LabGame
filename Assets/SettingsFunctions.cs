@@ -23,13 +23,13 @@ public class SettingsFunctions : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        Time.timeScale = 1.0f;
+        //Time.timeScale = 1.0f;
         MainMenuMode();
     }
 
     public void GoToSettingMenu()
     {
-        Time.timeScale = 0.0f;
+        //Time.timeScale = 0.0f;
         SettingMenuMode();
     }
 

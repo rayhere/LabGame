@@ -22,6 +22,7 @@ public class PauseResume : MonoBehaviour
 
     public void Pause()
     {
+        //Time.timeScale to zero to stop
         Time.timeScale = 0.0f;
         PauseMode();
     }

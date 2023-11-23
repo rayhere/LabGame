@@ -8,6 +8,11 @@ TagManager:
   - ShowInSettingMenu
   - ShowInResumeMode
   - ShowInPauseMode
+  - ShowInMenuMode
+  - ShowInPlayMode
+  - ShowInSettingMode
+  - ShowInInstructionMode
+  - MyBullet
   layers:
   - Default
   - TransparentFX

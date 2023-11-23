@@ -6,8 +6,10 @@ using static UnityEditor.PlayerSettings;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody RgbBullet;
+    //[SerializeField] private Rigidbody Trail;
     [SerializeField] public int NumOfBounces = 3;
     [SerializeField] public GameObject thisBullet;
+    //[SerializeField] public GameObject Trail;
     [SerializeField] public bool shooted;
     //[SerializeField] public float timer;
     private Vector3 lastVelocity;
@@ -16,31 +18,50 @@ public class Bullet : MonoBehaviour
     //private int curBounces = 0;
     //private Vector3 scaleChange, positionChange;
 
+    TrailRenderer Trail;
+
     private float timer = 3f;
 
     public float life = 3;
     public float targetSpeed;
     public float speed;
     public float speedDV;  // "damp velocity"
+
+    private Vector3 scaleChange, positionChange;
+    
+
     private void Awake()
     {
         //Destroy(gameObject, life);
         //scaleChange = new Vector3(-0.01f, -0.01f, -0.01f);
         //positionChange = new Vector3(0.0f, -0.005f, 0.0f);
+
+        scaleChange = new Vector3(-0.001f, -0.001f, -0.001f);
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //https://forum.unity.com/threads/changing-trail-renderer-variables-through-script.156206/
+        Trail = gameObject.GetComponent<TrailRenderer>();
+        if (Trail == null)
+        {
+            Debug.Log("Trail does not found");
+        }
+        else{
+            Debug.Log("Trail is found");
+        }
     }
     //Update is executed each frame;
     void Update()
     {
         if (shooted)
         {
-            
+            //https://docs.unity3d.com/ScriptReference/Transform-localScale.html
+            //change bullet scale
+            UpdateScale();
+
             if (timer < Time.time)
                 Destroy(gameObject);
         }
@@ -52,6 +73,8 @@ public class Bullet : MonoBehaviour
     void LateUpdate()
     {
         lastVelocity = RgbBullet.velocity;
+        //lastVelocity = thisBullet.velocity;
+
         //speed = Mathf.SmoothDamp(speed, targetSpeed, ref speedDV, 0.5f);
 
         // Move the object forward along its z axis 1 unit/second.
@@ -108,6 +131,7 @@ public class Bullet : MonoBehaviour
     {
         //Destroy(collision.gameObject);
         //Destroy(gameObject);
+
     }
 
     public void UpdateAngle(float angle)
@@ -119,5 +143,35 @@ public class Bullet : MonoBehaviour
     {
         this.shooted = shooted;
         timer += Time.time;
+    }
+
+    public void UpdateScale()
+    {
+        //RgbBullet
+        if (RgbBullet.transform.localScale.x > 0 || RgbBullet.transform.localScale.y > 0)
+        {
+            RgbBullet.transform.localScale += scaleChange;
+            
+        }
+        // if (Trail.transform.localScale.x > 0 || Trail.transform.localScale.y > 0)
+        // {
+        //     Trail.transform.localScale += scaleChange;
+        //     Trail.GetComponent<TrailRenderer>().width -= 0.01;
+            
+        // }
+        // if (Trail.startWidth >= 0)
+        // {
+        //     Trail.startWidth -= 0.01f;
+        // }
+
+        //Trail.transform.Translate(0,0,0);
+        //Trail.Width -= 0.01;
+
+
+        //Trail.GetComponent<TrailRenderer>().width -= 0.01;
+        // if (thisBullet.transform.localScale.x > 0 || thisBullet.transform.localScale.y > 0)
+        // {
+        //     thisBullet.transform.localScale += scaleChange;
+        // }
     }
 }
