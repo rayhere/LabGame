@@ -8,6 +8,7 @@ public class MainMenuScr : MonoBehaviour
     [SerializeField] GameObject[] playMode;
     [SerializeField] GameObject[] settingMode;
     [SerializeField] GameObject[] instructionMode;
+    [SerializeField] GameObject[] highscoreMode;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class MainMenuScr : MonoBehaviour
         playMode = GameObject.FindGameObjectsWithTag("ShowInPlayMode");
         settingMode = GameObject.FindGameObjectsWithTag("ShowInSettingMode");
         instructionMode = GameObject.FindGameObjectsWithTag("ShowInInstructionMode");
+        highscoreMode = GameObject.FindGameObjectsWithTag("ShowInHighScoreMode");
         MenuMode();
     }
 
@@ -46,6 +48,11 @@ public class MainMenuScr : MonoBehaviour
         InstructionMode();
     }
 
+    public void HighScoreButton()
+    {
+        HighScoreMode();
+    }
+
     public void MenuMode()
     {
 
@@ -58,6 +65,8 @@ public class MainMenuScr : MonoBehaviour
         foreach (GameObject go in settingMode)
             go.SetActive(false);
         foreach (GameObject go in instructionMode)
+            go.SetActive(false);
+        foreach (GameObject go in highscoreMode)
             go.SetActive(false);
     }
 
@@ -74,6 +83,8 @@ public class MainMenuScr : MonoBehaviour
             go.SetActive(false);
         foreach (GameObject go in instructionMode)
             go.SetActive(false);
+        foreach (GameObject go in highscoreMode)
+            go.SetActive(false);
     }
 
     public void SettingMode()
@@ -89,6 +100,8 @@ public class MainMenuScr : MonoBehaviour
             go.SetActive(false);
         foreach (GameObject go in instructionMode)
             go.SetActive(false);
+        foreach (GameObject go in highscoreMode)
+            go.SetActive(false);
     }
 
     public void InstructionMode()
@@ -103,6 +116,25 @@ public class MainMenuScr : MonoBehaviour
         foreach (GameObject go in playMode)
             go.SetActive(false);
         foreach (GameObject go in settingMode)
+            go.SetActive(false);
+        foreach (GameObject go in highscoreMode)
+            go.SetActive(false);
+    }
+
+    public void HighScoreMode()
+    {
+
+        foreach (GameObject go in highscoreMode)
+            go.SetActive(true);
+
+        //foreach (GameObject go in menuMode, playMode, settingMode)
+        foreach (GameObject go in menuMode)
+            go.SetActive(false);
+        foreach (GameObject go in playMode)
+            go.SetActive(false);
+        foreach (GameObject go in settingMode)
+            go.SetActive(false);
+        foreach (GameObject go in instructionMode)
             go.SetActive(false);
     }
 }

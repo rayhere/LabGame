@@ -5,6 +5,8 @@ using UnityEngine;
 public class Raven : MonoBehaviour
 {
     [SerializeField] GameObject raven;
+    [SerializeField] AudioSource audio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +16,24 @@ public class Raven : MonoBehaviour
 
         //raven fly speed
         float speed = Random.Range(0f, 500f);
-        raven.GetComponent<Rigidbody>().AddForce(new Vector2(200f + speed, 0));
+        if (raven.transform.localPosition.x <=0)
+        {
+            raven.GetComponent<Rigidbody>().AddForce(new Vector2(200f + speed, 0));
+        }
+        else 
+        {
+            raven.GetComponent<Rigidbody>().AddForce(new Vector2((200f + speed)* -1, 0));
+        }
+        
+
+        //raven fly sound
+        if (audio == null)
+        {
+            audio = GetComponent<AudioSource>();
+        }
+
+        //2. play sound effect
+        AudioSource.PlayClipAtPoint(audio.clip, transform.position);
     }
 
     // Update is called once per frame

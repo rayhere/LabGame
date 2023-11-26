@@ -22,7 +22,7 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene("instruction");
     }
 
-    public void PlayGame()
+    public void StartGame()
     {
         SceneManager.LoadScene("level1");
         //https://forum.unity.com/threads/animation-doesnt-play-after-loading-the-scene.1000402/
@@ -33,5 +33,15 @@ public class ButtonFunctions : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("mainMenu");
+        Time.timeScale = 1;       
+
+        //ScriptName sn = gameObject.GetComponent<ScriptName>()
+        //ScriptName sn = gameObject.GetComponent<ScriptName>(PersistentData);
+        //PersistentData.Instance.DestroyPersistentData();
+
+        //https://forum.unity.com/threads/calling-function-from-other-scripts-c.57072/
+        //myObject.GetComponent<MyScript>().MyFunction();
+        //PersistentData.DestoryPersistentData; 
+        //PersistentData.Instance.GetName();
     }
 }

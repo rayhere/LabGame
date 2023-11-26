@@ -13,6 +13,9 @@ TagManager:
   - ShowInSettingMode
   - ShowInInstructionMode
   - MyBullet
+  - ShowInHighScoreMode
+  - TopScoreName
+  - TopScore
   layers:
   - Default
   - TransparentFX

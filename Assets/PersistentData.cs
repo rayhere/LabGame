@@ -42,6 +42,12 @@ public class PersistentData : MonoBehaviour
         
     }
 
+    public void DestroyPersistentData()
+    {
+        Destroy(gameObject);
+        Debug.Log("Destroy(gameObject)");
+    }
+
     public void SetName(string n)
     {
         playerName = n;
