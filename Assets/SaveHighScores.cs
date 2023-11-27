@@ -63,7 +63,6 @@ public class SaveHighScores : MonoBehaviour
                     //set current value to current key
                     PlayerPrefs.SetInt(currentScoreKey, playerScore);
                     PlayerPrefs.SetString(currentNameKey, playerName);
-
                     return;
                 }
                 

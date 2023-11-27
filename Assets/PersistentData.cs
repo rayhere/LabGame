@@ -5,6 +5,7 @@ using UnityEngine;
 public class PersistentData : MonoBehaviour
 {
     [SerializeField] string playerName;
+    [SerializeField] int playerLevel;
     [SerializeField] int playerScore;
 
     public static PersistentData Instance;
@@ -27,6 +28,14 @@ public class PersistentData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerLevel = 1;
+        if (playerLevel == null)
+             playerLevel = 0;
+        if (playerLevel <= 0)
+            playerLevel = 0;
+        // if (playerLevel.HasValue)
+        //     playerLevel = 0;
+        
         // if (playerName == null)
         //     playerName = "unknown";
         if (playerScore <= 0)
@@ -42,15 +51,20 @@ public class PersistentData : MonoBehaviour
         
     }
 
-    public void DestroyPersistentData()
-    {
-        Destroy(gameObject);
-        Debug.Log("Destroy(gameObject)");
-    }
+    // public void DestroyPersistentData()
+    // {
+    //     Destroy(gameObject);
+    //     Debug.Log("Destroy(gameObject)");
+    // }
 
     public void SetName(string n)
     {
         playerName = n;
+    }
+
+    public void SetLevel(int l)
+    {
+        playerLevel = l;
     }
 
     public void SetScore(int s)
@@ -61,6 +75,11 @@ public class PersistentData : MonoBehaviour
     public string GetName()
     {
         return playerName;
+    }
+
+    public int GetLevel()
+    {
+        return playerLevel;
     }
 
     public int GetScore()

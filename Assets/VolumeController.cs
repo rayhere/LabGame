@@ -10,6 +10,8 @@ public class VolumeController : MonoBehaviour
 
     [SerializeField] private TMP_Text volumeTexUI = null;
 
+    //[SerializeField] private float showVolumeValue;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -33,6 +35,7 @@ public class VolumeController : MonoBehaviour
         float volumeValue = PlayerPrefs.GetFloat("VolumeValue");
         volumeSlider.value = volumeValue;
         AudioListener.volume = volumeValue;
+        //showVolumeValue = volumeValue;
     }
     // Update is called once per frame
     void Update()

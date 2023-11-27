@@ -28,6 +28,7 @@ public class StartButton : MonoBehaviour
         Debug.Log("your name is: " + s);
         //store in persistent data
         PersistentData.Instance.SetName(s);
+        PersistentData.Instance.SetLevel(1);
         PersistentData.Instance.SetScore(0);
         SceneManager.LoadScene("level1");
         Time.timeScale = 1;

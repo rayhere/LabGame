@@ -11,6 +11,7 @@ public class ScoreKeeper : MonoBehaviour
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text sceneText;
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text elapsedTimeText;
     
     [SerializeField] int level;
     [SerializeField] int scoreThresholdForThisLevel;
@@ -20,13 +21,17 @@ public class ScoreKeeper : MonoBehaviour
     public const int SCORE_THRESHOLD = 1;
     private bool loadNextScene = false;
 
-    public float timer = .8f;
+    public float loadNextSceneTimer = .8f;
     public float ttime;
+    private const float delay = .8f; // delay 0.8sec
+
+    float elapsedTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        level = SceneManager.GetActiveScene().buildIndex - 1;
+        //level = SceneManager.GetActiveScene().buildIndex - 1;
+        level = PersistentData.Instance.GetLevel();
         score = PersistentData.Instance.GetScore();
         scoreThresholdForThisLevel = SCORE_THRESHOLD * level;
         DisplayName();
@@ -37,11 +42,17 @@ public class ScoreKeeper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (loadNextScene && timer < Time.time)
+        if (loadNextScene && loadNextSceneTimer < Time.time)
         {
+            PersistentData.Instance.SetLevel(level+1);
             LoadNextScene();
             Debug.Log("loadNextScene is true and timer < Time.time");
         }
+
+        elapsedTime += Time.deltaTime;
+        int minutes = Mathf.FloorToInt(elapsedTime / 60);
+        int seconds = Mathf.FloorToInt(elapsedTime % 60);
+        elapsedTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         
     }
 
@@ -59,9 +70,11 @@ public class ScoreKeeper : MonoBehaviour
             // SceneManager.LoadScene(scene, LoadSceneMode.Single);
             // Time.timeScale = 1;
 
-            timer += Time.time;
+            loadNextSceneTimer = delay + Time.time;
             loadNextScene = true;
             Debug.Log("loadNextScene is true");
+            Debug.Log("loadNextSceneTimer is "+loadNextSceneTimer);
+            Debug.Log("Time.time is "+Time.time);
         }
 
 
@@ -70,7 +83,6 @@ public class ScoreKeeper : MonoBehaviour
     public void AddPoints()
     {
         AddPoints(DEFAULT_POINTS);
-
     }
 
     private void DisplayName()
@@ -78,20 +90,22 @@ public class ScoreKeeper : MonoBehaviour
         nameText.SetText("Hi, " + PersistentData.Instance.GetName() + "!");
     }
 
-    private void DisplayScore()
-    {
-        scoreText.SetText("Score: " + score);
-    }
-
     private void DisplayScene()
     {
         sceneText.SetText("Level: " + level);
     }
 
+    private void DisplayScore()
+    {
+        scoreText.SetText("Score: " + score);
+    }
+
     private void LoadNextScene()
     {
-        int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        SceneManager.LoadScene("level1");
+
+        //int scene = SceneManager.GetActiveScene().buildIndex;
+        //SceneManager.LoadScene(scene, LoadSceneMode.Single);
         Time.timeScale = 1;
     }
 }
