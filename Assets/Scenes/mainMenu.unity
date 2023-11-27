@@ -1370,6 +1370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec475a1f6397457a83f877c3fb44247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeText: {fileID: 794021013}
+  FireRateText: {fileID: 1369351262}
   inGameTimeToggle: {fileID: 1835174894}
   inGameFireRateToggle: {fileID: 1144243154}
   inGameLifeToggle: {fileID: 1083820845}
@@ -3023,8 +3025,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 959548073}
   - {fileID: 988304340}
+  - {fileID: 959548073}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3738,10 +3740,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Try to pop the balloon before it becomes too large and bursts.\nThe balloon
-    will reappear until the remaining time reaches zero.\n\n1. Use WASD to move the
-    Slinghsot\n2. Hold down left mouse button will load ammo \n3. Aiming your shot
-    by adjust mouse position\n4. Release left mouse button to fire ammo."
+  m_text: "Try to pop the balloon before it becomes too large and bursts. The balloon
+    will reappear until the remaining time reaches zero. Each level will have more
+    Ravens and get bonus play time.\n\n1. Use WASD to move the Slinghsot\n2. Hold
+    down left mouse button will load ammo \n3. Aiming your shot by adjust mouse position\n4.
+    Release left mouse button to fire ammo."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8985,10 +8988,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 78149048}
   - {fileID: 307726298}
   - {fileID: 2076881725}
   - {fileID: 2018258982}
+  - {fileID: 78149048}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

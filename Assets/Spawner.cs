@@ -16,6 +16,10 @@ public class Spawner : MonoBehaviour
     public float ravenTimer = .5f; 
     private float ravenTimeCycle = .5f; //spawning cycle
 
+
+    private float balloonTimer = 1f;
+    private float balloonTimeCycle = 1f; //spawning cycle
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +30,9 @@ public class Spawner : MonoBehaviour
         //raven spawn 
         ravenTimer += Time.time;
         ravenSpawn();
+
+        ravenTimeCycle = ravenTimeCycle /PersistentData.Instance.GetLevel();
+        //ravenTimeCycle = ravenTimeCycle /10;
 
     }
 
@@ -38,7 +45,7 @@ public class Spawner : MonoBehaviour
             ravenTimer = Time.time + ravenTimeCycle;
         }
 
-        if (NUM_Balloon > 0)
+        if (NUM_Balloon > 0 && balloonTimer < Time.time)
         {
             Spawn();
         }
@@ -102,6 +109,9 @@ public class Spawner : MonoBehaviour
 
     public void SetNumBalloon(int b)
     {
+        //Delay
+        balloonTimer = Time.time + balloonTimeCycle;
+
         NUM_Balloon = b;
     }
 

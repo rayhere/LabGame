@@ -30,6 +30,7 @@ public class StartButton : MonoBehaviour
         PersistentData.Instance.SetName(s);
         PersistentData.Instance.SetLevel(1);
         PersistentData.Instance.SetScore(0);
+        PersistentData.Instance.SetRemainingTime(20);
         SceneManager.LoadScene("level1");
         Time.timeScale = 1;
     }

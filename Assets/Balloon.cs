@@ -23,7 +23,10 @@ public class Balloon : MonoBehaviour
     public float ttime;
     public Vector3 maxScale;
     public bool collisionTriggered = false;
+    public float swingForce;
+    public float swingTime;
 
+    private int goLeft = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +54,11 @@ public class Balloon : MonoBehaviour
         {
             gameController = GameObject.FindGameObjectWithTag("GameController");
         }
+
+        swingForce = Random.Range(10f, 20f);
+        swingTime = .5f;
+
+        
     }
 
     // Update is called once per frame
@@ -60,6 +68,8 @@ public class Balloon : MonoBehaviour
         if (canDestory && timer < Time.time)
         {
             //Spawner.Instance.SetNumBalloon(1);
+
+            //Self Explosion
             gameController.GetComponent<Spawner>().SetNumBalloon(1);
             Destroy(gameObject);
             
@@ -81,8 +91,40 @@ public class Balloon : MonoBehaviour
                 timer += Time.time;
             }
         }
-            
         
+        //swingTime += Time.time;
+        // Debug.Log("swingTime" + swingTime);
+        // Debug.Log("Time.deltaTime" + Time.time);
+        // if (swingTime <= Time.time)
+        // {
+        //     Debug.Log("swingTime" + swingTime);
+        //     //change left or right
+        //     if (goLeft == 0)
+        //     {
+        //         thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce * (-5), 0));
+        //         goLeft += 1;
+        //         swingTime = 1+Time.time;
+        //     }
+        //     else if (goLeft == 1)
+        //     {
+        //         thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce * (10), 0));
+        //         goLeft += 1;
+        //         swingTime = 1+Time.time;
+        //     }
+        //     else if (goLeft == 2)
+        //     {
+        //         thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce * (-10), 0));
+        //         //goLeft += 1;
+        //         goLeft = 1;
+        //         swingTime = 1+Time.time;
+        //     }
+        //     else
+        //     {
+        //         // goLeft = 0;
+        //         // swingTime = 1+Time.time;
+        //     }
+            
+        // }
         BalloonMovement();
         // if (maxScale.x > thisBalloon.transform.localScale.x)
         // {
@@ -144,7 +186,9 @@ public class Balloon : MonoBehaviour
                 //collisionTriggered = true;
 
                 // increase score
-                gameController.GetComponent<ScoreKeeper>().AddPoints();
+                //gameController.GetComponent<ScoreKeeper>().AddPoints();
+                int rounded_f = (int)(thisBalloon.transform.localScale.x +0.5f);
+                gameController.GetComponent<ScoreKeeper>().AddPoints(4 - rounded_f);
             }
             Debug.Log("MyBullet collision detected");
         }
@@ -200,13 +244,46 @@ public class Balloon : MonoBehaviour
 
     void BalloonMovement()
     {
-        thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2( 0, .001f));
+        
+        thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(0, Random.Range(.001f, .01f)));
+        //thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2( 0, .001f));
         // Vector3 position = new Vector3(Random.Range(xMin1, xMax1),Random.Range(yMin1,yMax1), 190);
         //     if (position.y < 1.2 && position.x < -7)
         //         position.x +=1;
         //     if (position.y < 1.2 && position.x > 7)
         //         position.x -=1;
+        //thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce, 0));
+
+        if (swingTime <= Time.time)
+        {
+            Debug.Log("swingTime" + swingTime);
+            //change left or right
+            if (goLeft == 0)
+            {
+                thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce * (-5), 0));
+                goLeft += 1;
+                swingTime = 1+Time.time;
+            }
+            else if (goLeft == 1)
+            {
+                thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce * (10), 0));
+                goLeft += 1;
+                swingTime = 1+Time.time;
+            }
+            else if (goLeft == 2)
+            {
+                thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce * (-10), 0));
+                //goLeft += 1;
+                goLeft = 1;
+                swingTime = 1+Time.time;
+            }
+            else
+            {
+                // goLeft = 0;
+                // swingTime = 1+Time.time;
+            }
             
+        }
     }
 
     void BalloonScale()

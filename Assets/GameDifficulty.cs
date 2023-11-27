@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class GameDifficulty : MonoBehaviour
 {
+    [SerializeField] TMP_Text TimeText;
+    [SerializeField] TMP_Text FireRateText;
+
     public GameObject inGameTimeToggle;
     public GameObject inGameFireRateToggle;
     public GameObject inGameLifeToggle;
@@ -17,6 +20,8 @@ public class GameDifficulty : MonoBehaviour
         inGameTimeToggle.GetComponent<Toggle>().isOn = true;
         inGameFireRateToggle.GetComponent<Toggle>().isOn = false;
         inGameLifeToggle.GetComponent<Toggle>().isOn = false;
+        DisplayBonusTime();
+        DisplayBonusFireRate();
     }
 
     // Update is called once per frame
@@ -37,6 +42,9 @@ public class GameDifficulty : MonoBehaviour
         GameMod.Modifier.SetBonusTime(true);
         GameMod.Modifier.SetBonusFireRate(true);
         GameMod.Modifier.SetBonusLife(true);
+
+        DisplayBonusTime();
+        DisplayBonusFireRate();
     }
 
     public void NormalModeButton()
@@ -52,6 +60,9 @@ public class GameDifficulty : MonoBehaviour
         GameMod.Modifier.SetBonusTime(true);
         GameMod.Modifier.SetBonusFireRate(false);
         GameMod.Modifier.SetBonusLife(false);
+
+        DisplayBonusTime();
+        DisplayBonusFireRate();
     }
 
     public void HardModeButton()
@@ -67,6 +78,9 @@ public class GameDifficulty : MonoBehaviour
         GameMod.Modifier.SetBonusTime(false);
         GameMod.Modifier.SetBonusFireRate(false);
         GameMod.Modifier.SetBonusLife(false);
+
+        DisplayBonusTime();
+        DisplayBonusFireRate();
     }
 
     // public void SetBonusTime(bool isBonusTime)
@@ -129,4 +143,18 @@ public class GameDifficulty : MonoBehaviour
 
     //     }
     // }
+
+    private void DisplayBonusTime()
+    {
+        TimeText.SetText("+" + (int)Mathf.Round(GameMod.Modifier.GetBonusTime()+.1f) + "Sec/nEach next Level");
+    }
+// float someFloat = 42.7f;
+// int someInt = (int)Math.Round(someFloat);   // 43
+    private void DisplayBonusFireRate()
+    {
+        FireRateText.SetText("FireRate " + (double)(Mathf.Round(GameMod.Modifier.GetBonusFireRate()*100f)/100f));
+        //yourFloat = Mathf.Round(yourFloat * 100f) / 100f;
+        //FireRateText.SetText("FireRate " + (double)Mathf.Round(GameMod.Modifier.GetBonusFireRate()));
+    }
+
 }

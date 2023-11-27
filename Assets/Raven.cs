@@ -53,4 +53,110 @@ public class Raven : MonoBehaviour
         //     Destroy(gameObject);
         // }
     }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        //what should happen now?
+        //1. count the coins or increase score
+        //2.  play sound effect
+        //3. coin should disapper
+
+        //1. increase score
+        //controller.GetComponent<Scorekeeper>().AddPoints();
+
+        //2. play sound effect
+        //AudioSource.PlayClipAtPoint(audio.clip, transform.position);
+
+        //audio.Play() -- this will work but won't work if coin gets destroyed before audio is played.
+
+        //3. destroy coin
+        //Destroy(gameObject);
+
+
+        //Detecting Collisions with a certain tag
+
+        //Check for a match with the specific tag on any GameObject that collides with your GameObject
+        if (collision.gameObject.tag == "MyBullet")
+        {
+            //destory the MyBullet
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            //If the GameObject has the same tag as specified, output this message in the console
+            // if (!canDestory)
+            {
+                //animator.SetInteger("popped", POPPED);
+                // Debug.Log("Popped: " + POPPED);
+
+                // Debug.Log("timer: " + timer);
+                // Debug.Log("deltaTime: " + Time.deltaTime);
+                // Debug.Log("Time.time: " + Time.time);
+            
+                // timer += Time.time;
+
+                // Debug.Log("new timer: " + timer);
+
+                // //2. play sound effect
+                // AudioSource.PlayClipAtPoint(audio.clip, transform.position);
+
+                // //audio.Play() -- this will work but won't work if coin gets destroyed before audio is played.
+
+                // canDestory = true;
+                // //collisionTriggered = true;
+
+                // // increase score
+                // //gameController.GetComponent<ScoreKeeper>().AddPoints();
+                // int rounded_f = (int)(thisBalloon.transform.localScale.x +0.5f);
+                // gameController.GetComponent<ScoreKeeper>().AddPoints(4 - rounded_f);
+            }
+            Debug.Log("MyBullet collision detected");
+        }
+        else
+        {
+            // if (!canDestory)
+            // {
+            //     animator.SetInteger("popped", POPPED);
+            //     Debug.Log("Popped: " + POPPED);
+
+            //     Debug.Log("timer: " + timer);
+            //     Debug.Log("deltaTime: " + Time.deltaTime);
+            //     Debug.Log("Time.time: " + Time.time);
+            
+            //     timer += Time.time;
+
+            //     Debug.Log("new timer: " + timer);
+
+            //     canDestory = true;
+            // }
+            Debug.Log("collision detected");
+        }
+
+        // if (!canDestory)
+        // {
+        //     animator.SetInteger("popped", POPPED);
+        //     Debug.Log("Popped: " + POPPED);
+
+        //     Debug.Log("timer: " + timer);
+        //     Debug.Log("deltaTime: " + Time.deltaTime);
+        //     Debug.Log("Time.time: " + Time.time);
+            
+        //     timer += Time.time;
+
+        //     Debug.Log("new timer: " + timer);
+
+        //     canDestory = true;
+        // }
+
+        // animator.SetInteger("popped", POPPED);
+        // Debug.Log("Popped: " + POPPED);
+
+        // Debug.Log("timer: " + timer);
+        // Debug.Log("deltaTime: " + Time.deltaTime);
+        // Debug.Log("Time.time: " + Time.time);
+        
+        // timer += Time.time;
+
+        // Debug.Log("new timer: " + timer);
+
+        // canDestory = true;
+    }
 }

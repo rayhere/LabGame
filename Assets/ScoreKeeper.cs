@@ -28,6 +28,7 @@ public class ScoreKeeper : MonoBehaviour
 
     float elapsedTime;
     [SerializeField] float remainingTime;
+    //public const float DEFAULT_remainingTime = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -73,6 +74,7 @@ public class ScoreKeeper : MonoBehaviour
         // if remainging Time is Zero, GameOver
         if (remainingTime <= 0)
         {
+            //remainingTime = DEFAULT_remainingTime;
             SceneManager.LoadScene("highscores");
             Time.timeScale = 1;
         }

@@ -45,7 +45,7 @@ public class PersistentData : MonoBehaviour
         // if (playerScore.HasValue)
         //     playerScore = 0;
 
-        remainingTime = 20;
+        remainingTime = 30;
     }
 
     // Update is called once per frame
