@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonFunctions : MonoBehaviour
+public class SceneChanger : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -37,7 +37,7 @@ public class ButtonFunctions : MonoBehaviour
 
         //ScriptName sn = gameObject.GetComponent<ScriptName>()
         //ScriptName sn = gameObject.GetComponent<ScriptName>(PersistentData);
-        
+
         //PersistentData.Instance.DestroyPersistentData();
 
         //https://forum.unity.com/threads/calling-function-from-other-scripts-c.57072/

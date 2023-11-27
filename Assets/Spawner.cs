@@ -5,10 +5,12 @@ using UnityEngine;
 //public int backgroundZ = 190;
 public class Spawner : MonoBehaviour
 {
-    const int NUM_COINS = 3;
+    public int NUM_Balloon = 1;
     [SerializeField] GameObject balloon;
 
     [SerializeField] GameObject raven;
+
+    public static Spawner Instance;
 
     public float ttime;
     public float ravenTimer = .5f; 
@@ -19,6 +21,7 @@ public class Spawner : MonoBehaviour
     {
         //Debug.Log("Spawner Start Run");
         Spawn();
+        NUM_Balloon = 0;
 
         //raven spawn 
         ravenTimer += Time.time;
@@ -34,6 +37,11 @@ public class Spawner : MonoBehaviour
             ravenSpawn();
             ravenTimer = Time.time + ravenTimeCycle;
         }
+
+        if (NUM_Balloon > 0)
+        {
+            Spawn();
+        }
     }
 
     void Spawn()
@@ -48,7 +56,7 @@ public class Spawner : MonoBehaviour
         // int yMin2 = 2;
         // int yMax2 = 6;
 
-        for (int i = 0; i < NUM_COINS; i++)
+        for (int i = 0; i < NUM_Balloon; i++)
         {
             Vector3 position = new Vector3(Random.Range(xMin1, xMax1),Random.Range(yMin1,yMax1), 10);
             if (position.y < 1.2 && position.x < -7)
@@ -58,7 +66,7 @@ public class Spawner : MonoBehaviour
 
             Instantiate(balloon, position, Quaternion.identity);
         }
-
+        NUM_Balloon = 0;
 
         // for (int i = NUM_COINS/2; i < NUM_COINS; i++)
         // {
@@ -90,6 +98,11 @@ public class Spawner : MonoBehaviour
         Vector3 position = new Vector3(xPos,Random.Range(yMin1,yMax1), 10);
         Instantiate(raven, position, Quaternion.identity);
 
+    }
+
+    public void SetNumBalloon(int b)
+    {
+        NUM_Balloon = b;
     }
 
 

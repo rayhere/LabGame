@@ -16,6 +16,8 @@ TagManager:
   - ShowInHighScoreMode
   - TopScoreName
   - TopScore
+  - Raven
+  - Balloon
   layers:
   - Default
   - TransparentFX

@@ -21,6 +21,13 @@ public class Slingshot : MonoBehaviour
     //add shooting sound
     [SerializeField] AudioSource audio;
 
+    //add firerate
+    public float firerate = .5f;
+
+    private float timeFire;
+    private float nextTimeFire;
+    private bool timeForFire;
+
     private LineRenderer _lineRenderer;
     public GameObject _newBall;
     private Camera mainCamLocal;
@@ -41,6 +48,11 @@ public class Slingshot : MonoBehaviour
         {
             audio = GetComponent<AudioSource>();
         }
+
+        // read firerate
+        firerate = GameMod.Modifier.GetBonusFireRate();
+
+        timeForFire = true;
     }
 
     // Update is called once per frame
@@ -52,6 +64,18 @@ public class Slingshot : MonoBehaviour
 
         //if (Input.GetMouseButton(0) && mousePos.x > rigid.position.x - 1.5 && mousePos.x < rigid.position.x + 1.5 && mousePos.y < rigid.position.y + 1.4 && mousePos.y > rigid.position.y -2)
         //{
+
+        //firerate
+        //every frame pass, increase timeFire
+        timeFire += Time.deltaTime;
+        //firerate: higher number faster
+        nextTimeFire = 1 / firerate;
+        
+        //when timeFire is larger than firerate
+        if (timeFire >= nextTimeFire)
+        {
+            //timeForFire = true;
+        
 
         //generate new ball
         if (Input.GetMouseButtonDown(0) && _newBall == null)
@@ -127,7 +151,7 @@ public class Slingshot : MonoBehaviour
             //}
             
         //}
-
+        }
         if (TransPoint1 && TransPoint2)
         {
             _lineRenderer.SetPosition(0, TransPoint1.position);
@@ -187,6 +211,10 @@ public class Slingshot : MonoBehaviour
 
             //reset lineRender position
             _lineRenderer.positionCount = 2;
+
+            //set timeFire and timeForFire
+            timeFire = 0;
+            //timeForFire = false;
         }
 
         //if (_newBall != null)

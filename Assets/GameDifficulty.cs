@@ -34,9 +34,9 @@ public class GameDifficulty : MonoBehaviour
         // inGameLifeToggle = true;
 
         //set GameModifier
-        GameModifier.Modifier.SetBonusTime(true);
-        GameModifier.Modifier.SetBonusFireRate(true);
-        GameModifier.Modifier.SetBonusLife(true);
+        GameMod.Modifier.SetBonusTime(true);
+        GameMod.Modifier.SetBonusFireRate(true);
+        GameMod.Modifier.SetBonusLife(true);
     }
 
     public void NormalModeButton()
@@ -49,9 +49,9 @@ public class GameDifficulty : MonoBehaviour
         // inGameLifeToggle = false;
 
         //set GameModifier
-        GameModifier.Modifier.SetBonusTime(true);
-        GameModifier.Modifier.SetBonusFireRate(false);
-        GameModifier.Modifier.SetBonusLife(false);
+        GameMod.Modifier.SetBonusTime(true);
+        GameMod.Modifier.SetBonusFireRate(false);
+        GameMod.Modifier.SetBonusLife(false);
     }
 
     public void HardModeButton()
@@ -64,29 +64,69 @@ public class GameDifficulty : MonoBehaviour
         // inGameLifeToggle = false;
 
         //set GameModifier
-        GameModifier.Modifier.SetBonusTime(false);
-        GameModifier.Modifier.SetBonusFireRate(false);
-        GameModifier.Modifier.SetBonusLife(false);
+        GameMod.Modifier.SetBonusTime(false);
+        GameMod.Modifier.SetBonusFireRate(false);
+        GameMod.Modifier.SetBonusLife(false);
     }
 
-    public void SetBonusTime(bool isBonusTime)
-    {
-        // for toggle clicked event
-        // update GameModifier
-        GameModifier.Modifier.SetBonusTime(isBonusTime);
-    }
+    // public void SetBonusTime(bool isBonusTime)
+    // {
+    //     // for toggle clicked event
+    //     // update GameModifier
+    //     // if (isBonusTime = true)
+    //     // {
+    //     //     GameModifier.Modifier.SetBonusTime(true);
+    //     // }
+    //     // else
+    //     // {
+    //     //     GameModifier.Modifier.SetBonusTime(false);
+    //     // }
+    //     if (isBonusTime = true)
+    //     {
+    //         SetBonusTime();
+    //     }
+    //     //GameModifier.Modifier.SetBonusTimeTrue();
+    // }
 
-    public void SetBonusFireRate(bool isBonusFireRate)
-    {
-        // for toggle clicked event
-        // update GameModifier
-        GameModifier.Modifier.SetBonusFireRate(isBonusFireRate);
-    }
+    // public void SetBonusTime()
+    // {
+    //     if (inGameTimeToggle.GetComponent<Toggle>().isOn = true)
+    //     {
+    //         PersistentData.Instance.SetScore(1);
 
-    public void SetBonusLife(bool isBonusLife)
-    {
-        // for toggle clicked event
-        // update GameModifier
-        GameModifier.Modifier.SetBonusLife(isBonusLife);
-    }
+    //     }
+    // }
+
+    // public void SetBonusFireRate(bool isBonusFireRate)
+    // {
+    //     // for toggle clicked event
+    //     // update GameModifier
+    //     if (isBonusFireRate = true)
+    //     {
+    //         GameModifier.Modifier.SetBonusFireRate(true);
+    //     }
+    //     else
+    //     {
+    //         GameModifier.Modifier.SetBonusFireRate(false);
+    //     }
+    // }
+
+    // public void SetBonusLife(bool isBonusLife)
+    // {
+    //     // for toggle clicked event
+    //     // update GameModifier
+    //     // if (isBonusLife != null)
+    //     // {
+    //     //     GameModifier.Modifier.SetBonusLife(isBonusLife);
+    //     // }
+    //     // else
+    //     // {
+    //     //     GameModifier.Modifier.SetBonusLife(isBonusLife);
+    //     // }
+
+    //     if (isBonusLife = true)
+    //     {
+
+    //     }
+    // }
 }

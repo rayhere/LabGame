@@ -7,6 +7,8 @@ public class PersistentData : MonoBehaviour
     [SerializeField] string playerName;
     [SerializeField] int playerLevel;
     [SerializeField] int playerScore;
+    [SerializeField] float remainingTime;
+    
 
     public static PersistentData Instance;
 
@@ -43,6 +45,7 @@ public class PersistentData : MonoBehaviour
         // if (playerScore.HasValue)
         //     playerScore = 0;
 
+        remainingTime = 20;
     }
 
     // Update is called once per frame
@@ -72,6 +75,11 @@ public class PersistentData : MonoBehaviour
         playerScore = s;
     }
 
+    public void SetRemainingTime(float r)
+    {
+        remainingTime = r;
+    }
+
     public string GetName()
     {
         return playerName;
@@ -85,5 +93,10 @@ public class PersistentData : MonoBehaviour
     public int GetScore()
     {
         return playerScore;
+    }
+
+    public float GetRemainingTime()
+    {
+        return remainingTime;
     }
 }

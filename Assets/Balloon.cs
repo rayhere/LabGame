@@ -59,7 +59,10 @@ public class Balloon : MonoBehaviour
         ttime = Time.time;
         if (canDestory && timer < Time.time)
         {
+            //Spawner.Instance.SetNumBalloon(1);
+            gameController.GetComponent<Spawner>().SetNumBalloon(1);
             Destroy(gameObject);
+            
         }
         else if (!canDestory)
         {
@@ -80,7 +83,7 @@ public class Balloon : MonoBehaviour
         }
             
         
-        // BalloonMovement();
+        BalloonMovement();
         // if (maxScale.x > thisBalloon.transform.localScale.x)
         // {
         //     BalloonScale();
@@ -197,6 +200,7 @@ public class Balloon : MonoBehaviour
 
     void BalloonMovement()
     {
+        thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2( 0, .001f));
         // Vector3 position = new Vector3(Random.Range(xMin1, xMax1),Random.Range(yMin1,yMax1), 190);
         //     if (position.y < 1.2 && position.x < -7)
         //         position.x +=1;
@@ -207,6 +211,6 @@ public class Balloon : MonoBehaviour
 
     void BalloonScale()
     {
-        thisBalloon.transform.localScale += new Vector3 (0.0001f, 0.0001f, 0.0001f);
+        thisBalloon.transform.localScale += new Vector3 (0.001f, 0.001f, 0.001f);
     }
 }

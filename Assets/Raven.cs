@@ -7,6 +7,13 @@ public class Raven : MonoBehaviour
     [SerializeField] GameObject raven;
     [SerializeField] AudioSource audio;
 
+    //destroy timer
+    //public float timer = 8f;
+    //public bool canDestory = false;
+    public float ttime;
+
+    //public bool collisionTriggered = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,12 +40,17 @@ public class Raven : MonoBehaviour
         }
 
         //2. play sound effect
-        AudioSource.PlayClipAtPoint(audio.clip, transform.position);
+        //AudioSource.PlayClipAtPoint(audio.clip, transform.position);
+        audio.Play(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // ttime = Time.time;
+        // if (timer < Time.time)
+        // {
+        //     Destroy(gameObject);
+        // }
     }
 }

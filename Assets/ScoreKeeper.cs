@@ -12,7 +12,8 @@ public class ScoreKeeper : MonoBehaviour
     [SerializeField] TMP_Text sceneText;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text elapsedTimeText;
-    
+    [SerializeField] TMP_Text remainingTimeText;
+
     [SerializeField] int level;
     [SerializeField] int scoreThresholdForThisLevel;
 
@@ -26,13 +27,16 @@ public class ScoreKeeper : MonoBehaviour
     private const float delay = .8f; // delay 0.8sec
 
     float elapsedTime;
+    [SerializeField] float remainingTime;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         //level = SceneManager.GetActiveScene().buildIndex - 1;
         level = PersistentData.Instance.GetLevel();
         score = PersistentData.Instance.GetScore();
+        remainingTime = PersistentData.Instance.GetRemainingTime();
         scoreThresholdForThisLevel = SCORE_THRESHOLD * level;
         DisplayName();
         DisplayScene();
@@ -44,22 +48,46 @@ public class ScoreKeeper : MonoBehaviour
     {
         if (loadNextScene && loadNextSceneTimer < Time.time)
         {
+            // function Update() 
+            // {
+            //     time = Time.timeSinceLevelLoad;
+            // }
             PersistentData.Instance.SetLevel(level+1);
+            loadNextScene = false;
             LoadNextScene();
             Debug.Log("loadNextScene is true and timer < Time.time");
         }
 
-        elapsedTime += Time.deltaTime;
-        int minutes = Mathf.FloorToInt(elapsedTime / 60);
-        int seconds = Mathf.FloorToInt(elapsedTime % 60);
-        elapsedTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        // elapsedTime += Time.deltaTime;
+        // int minutes = Mathf.FloorToInt(elapsedTime / 60);
+        // int seconds = Mathf.FloorToInt(elapsedTime % 60);
+        // elapsedTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         
+        remainingTime -= Time.deltaTime;
+        int minutes = Mathf.FloorToInt(remainingTime / 60);
+        int seconds = Mathf.FloorToInt(remainingTime % 60);
+        remainingTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+
+        // if remainging Time is Zero, GameOver
+        if (remainingTime <= 0)
+        {
+            SceneManager.LoadScene("highscores");
+            Time.timeScale = 1;
+        }
+
     }
 
     public void AddPoints(int points)
     {
         score += points;
         PersistentData.Instance.SetScore(score);
+
+        // reward
+        float newRemaingingTime = remainingTime + GameMod.Modifier.GetBonusTime();
+        PersistentData.Instance.SetRemainingTime(newRemaingingTime);
+        
         DisplayScore();
 
         if(score >= scoreThresholdForThisLevel)
@@ -83,6 +111,9 @@ public class ScoreKeeper : MonoBehaviour
     public void AddPoints()
     {
         AddPoints(DEFAULT_POINTS);
+
+        //starttime - 
+
     }
 
     private void DisplayName()

@@ -50,9 +50,9 @@ public class GameModifier : MonoBehaviour
         // inGameTimeToggle.GetComponent<Toggle>().isOn = true;
         // inGameFireRateToggle.GetComponent<Toggle>().isOn = false;
         // inGameLifeToggle.GetComponent<Toggle>().isOn = false;
-        bonusTime = 3f;
-        bonusFireRate = 2;
-        bonusLife = 1;
+        // bonusTime = 3f;
+        // bonusFireRate = 2;
+        // bonusLife = 1;
     }
 
     // Update is called once per frame
@@ -150,6 +150,4 @@ public class GameModifier : MonoBehaviour
     {
         return bonusLife;
     }
-
-
 }
