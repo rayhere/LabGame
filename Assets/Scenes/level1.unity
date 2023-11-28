@@ -326,7 +326,6 @@ MonoBehaviour:
   level: 0
   scoreThresholdForThisLevel: 0
   loadNextSceneTimer: 0.8
-  ttime: 0
   remainingTime: 0
 --- !u!114 &81235784
 MonoBehaviour:
@@ -343,7 +342,6 @@ MonoBehaviour:
   NUM_Balloon: 1
   balloon: {fileID: 3204070864537093748, guid: 13269cbaf2be14a54ab78f79b243ed62, type: 3}
   raven: {fileID: 4991169807778724262, guid: c7ae83f80c8aa44c8afbb9330a406322, type: 3}
-  ttime: 0
   ravenTimer: 0.5
 --- !u!114 &81235786
 MonoBehaviour:
@@ -387,15 +385,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 601154549}
   - {fileID: 28155471}
   - {fileID: 1866798199}
   m_Father: {fileID: 700341929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &178966947
 MonoBehaviour:
@@ -1186,7 +1183,6 @@ MonoBehaviour:
   rigid: {fileID: 506484578}
   bulletSpawnPoint: {fileID: 8506725542083686838, guid: a3526ef9f45d8a348905ab21e0db54d6, type: 3}
   BallPrefab: {fileID: 8532214099193193525, guid: a3526ef9f45d8a348905ab21e0db54d6, type: 3}
-  rubberPower: 0
   centerPos: {x: 0, y: 0, z: 0}
   audio: {fileID: 0}
   firerate: 0.5
@@ -1481,7 +1477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -33.5, y: -50}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &595613063
@@ -1593,8 +1589,8 @@ GameObject:
   - component: {fileID: 601154551}
   - component: {fileID: 601154550}
   m_Layer: 5
-  m_Name: Shawdow
-  m_TagString: Untagged
+  m_Name: Shadow
+  m_TagString: ShowInPauseMode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1611,12 +1607,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 178966946}
+  m_Father: {fileID: 700341929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1600, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &601154550
 MonoBehaviour:
@@ -1865,6 +1861,7 @@ RectTransform:
   - {fileID: 938336279}
   - {fileID: 716806057}
   - {fileID: 1834388206}
+  - {fileID: 601154549}
   - {fileID: 178966946}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2473,7 +2470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -33.5, y: 50}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1401270254
@@ -2822,8 +2819,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d69a81f51cb8f4c0f8792ab19eab7d9b, type: 2}
+  m_sharedMaterial: {fileID: -3419313782966976992, guid: d69a81f51cb8f4c0f8792ab19eab7d9b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2854,8 +2851,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3482,7 +3479,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -33.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1898561326

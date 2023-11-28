@@ -32,9 +32,9 @@ public class SceneChanger : MonoBehaviour
 
     public void MainMenu()
     {
+        PersistentData.Instance.SetLevel(0);
         SceneManager.LoadScene("mainMenu");
         Time.timeScale = 1;       
-
         //ScriptName sn = gameObject.GetComponent<ScriptName>()
         //ScriptName sn = gameObject.GetComponent<ScriptName>(PersistentData);
 
