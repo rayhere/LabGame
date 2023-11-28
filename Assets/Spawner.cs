@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour
 
     public static Spawner Instance;
 
-    public float ttime;
+    //public float ttime;
     public float ravenTimer = .5f; 
     private float ravenTimeCycle = .5f; //spawning cycle
 
@@ -31,9 +31,17 @@ public class Spawner : MonoBehaviour
         ravenTimer += Time.time;
         ravenSpawn();
 
-        ravenTimeCycle = ravenTimeCycle /PersistentData.Instance.GetLevel();
+        //raven reSpawn time will be shorter, if level is higher
+        int sceneLevel = PersistentData.Instance.GetLevel();
+        if (sceneLevel > 0)
+        {
+            ravenTimeCycle = ravenTimeCycle /PersistentData.Instance.GetLevel();
+        }
+        else
+        {
+            ravenTimeCycle = 1f;
+        }
         //ravenTimeCycle = ravenTimeCycle /10;
-
     }
 
     // Update is called once per frame
@@ -58,11 +66,6 @@ public class Spawner : MonoBehaviour
         int xMax1 = 7;
         int yMax1 = 4;
 
-        // int xMin2 = -9;
-        // int xMax2 = 13;
-        // int yMin2 = 2;
-        // int yMax2 = 6;
-
         for (int i = 0; i < NUM_Balloon; i++)
         {
             Vector3 position = new Vector3(Random.Range(xMin1, xMax1),Random.Range(yMin1,yMax1), 10);
@@ -70,28 +73,19 @@ public class Spawner : MonoBehaviour
                 position.x +=1;
             if (position.y < 1.2 && position.x > 7)
                 position.x -=1;
-
             Instantiate(balloon, position, Quaternion.identity);
         }
+        // set to zero, so update() won't tigger
         NUM_Balloon = 0;
-
-        // for (int i = NUM_COINS/2; i < NUM_COINS; i++)
-        // {
-        //     Vector2 position = new Vector2(Random.Range(xMin2, xMax2),Random.Range(yMin2,yMax2));
-        //     Instantiate(balloon, position, Quaternion.identity);
-        // }
-
     }
 
     void ravenSpawn()
     {
-        int xMin1 = -16;
         int yMin1 = 0;
-        int xMax1 = 17;
-        int yMax1 = 4;
+        int yMax1 = 8; //top of screen
         int xPos = 0;
 
-        int xRandom = Random.Range(-1,1);
+        double xRandom = Random.Range(-1,1);
         if (xRandom <= 0)
         {
             xPos = -16;
@@ -101,10 +95,8 @@ public class Spawner : MonoBehaviour
             xPos = 17;
         }
 
-
         Vector3 position = new Vector3(xPos,Random.Range(yMin1,yMax1), 10);
         Instantiate(raven, position, Quaternion.identity);
-
     }
 
     public void SetNumBalloon(int b)
@@ -114,6 +106,4 @@ public class Spawner : MonoBehaviour
 
         NUM_Balloon = b;
     }
-
-
 }

@@ -43,6 +43,6 @@ public class Movement : MonoBehaviour
             verticalMove = 0;
 
         //movement (background)
-        rigid.velocity = new Vector2(horizontalMove * hSPEED * 1, verticalMove * vSPEED * 1);
+        rigid.velocity = new Vector2(horizontalMove * hSPEED * 100 * Time.deltaTime, verticalMove * vSPEED * 100 * Time.deltaTime);
     }
 }

@@ -13,7 +13,6 @@ public class GameDifficulty : MonoBehaviour
     public GameObject inGameFireRateToggle;
     public GameObject inGameLifeToggle;
 
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +33,6 @@ public class GameDifficulty : MonoBehaviour
         inGameTimeToggle.GetComponent<Toggle>().isOn = true;
         inGameFireRateToggle.GetComponent<Toggle>().isOn = true;
         inGameLifeToggle.GetComponent<Toggle>().isOn = true;
-        // inGameTimeToggle = true;
-        // inGameFireRateToggle = true;
-        // inGameLifeToggle = true;
 
         //set GameModifier
         GameMod.Modifier.SetBonusTime(true);
@@ -52,9 +48,6 @@ public class GameDifficulty : MonoBehaviour
         inGameTimeToggle.GetComponent<Toggle>().isOn = true;
         inGameFireRateToggle.GetComponent<Toggle>().isOn = false;
         inGameLifeToggle.GetComponent<Toggle>().isOn = false;
-        // inGameTimeToggle = true;
-        // inGameFireRateToggle = false;
-        // inGameLifeToggle = false;
 
         //set GameModifier
         GameMod.Modifier.SetBonusTime(true);
@@ -70,9 +63,6 @@ public class GameDifficulty : MonoBehaviour
         inGameTimeToggle.GetComponent<Toggle>().isOn = false;
         inGameFireRateToggle.GetComponent<Toggle>().isOn = false;
         inGameLifeToggle.GetComponent<Toggle>().isOn = false;
-        // inGameTimeToggle = false;
-        // inGameFireRateToggle = false;
-        // inGameLifeToggle = false;
 
         //set GameModifier
         GameMod.Modifier.SetBonusTime(false);
@@ -83,73 +73,14 @@ public class GameDifficulty : MonoBehaviour
         DisplayBonusFireRate();
     }
 
-    // public void SetBonusTime(bool isBonusTime)
-    // {
-    //     // for toggle clicked event
-    //     // update GameModifier
-    //     // if (isBonusTime = true)
-    //     // {
-    //     //     GameModifier.Modifier.SetBonusTime(true);
-    //     // }
-    //     // else
-    //     // {
-    //     //     GameModifier.Modifier.SetBonusTime(false);
-    //     // }
-    //     if (isBonusTime = true)
-    //     {
-    //         SetBonusTime();
-    //     }
-    //     //GameModifier.Modifier.SetBonusTimeTrue();
-    // }
-
-    // public void SetBonusTime()
-    // {
-    //     if (inGameTimeToggle.GetComponent<Toggle>().isOn = true)
-    //     {
-    //         PersistentData.Instance.SetScore(1);
-
-    //     }
-    // }
-
-    // public void SetBonusFireRate(bool isBonusFireRate)
-    // {
-    //     // for toggle clicked event
-    //     // update GameModifier
-    //     if (isBonusFireRate = true)
-    //     {
-    //         GameModifier.Modifier.SetBonusFireRate(true);
-    //     }
-    //     else
-    //     {
-    //         GameModifier.Modifier.SetBonusFireRate(false);
-    //     }
-    // }
-
-    // public void SetBonusLife(bool isBonusLife)
-    // {
-    //     // for toggle clicked event
-    //     // update GameModifier
-    //     // if (isBonusLife != null)
-    //     // {
-    //     //     GameModifier.Modifier.SetBonusLife(isBonusLife);
-    //     // }
-    //     // else
-    //     // {
-    //     //     GameModifier.Modifier.SetBonusLife(isBonusLife);
-    //     // }
-
-    //     if (isBonusLife = true)
-    //     {
-
-    //     }
-    // }
-
     private void DisplayBonusTime()
     {
+        // method to get int from float
+        // float someFloat = 42.7f;
+        // int someInt = (int)Math.Round(someFloat);   // 43
         TimeText.SetText("+" + (int)Mathf.Round(GameMod.Modifier.GetBonusTime()+.1f) + "Sec/nEach next Level");
     }
-// float someFloat = 42.7f;
-// int someInt = (int)Math.Round(someFloat);   // 43
+
     private void DisplayBonusFireRate()
     {
         FireRateText.SetText("FireRate " + (double)(Mathf.Round(GameMod.Modifier.GetBonusFireRate()*100f)/100f));

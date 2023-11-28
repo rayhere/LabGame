@@ -31,10 +31,10 @@ public class PersistentData : MonoBehaviour
     void Start()
     {
         playerLevel = 1;
-        if (playerLevel == null)
-             playerLevel = 0;
-        if (playerLevel <= 0)
-            playerLevel = 0;
+        // if (playerLevel == null)
+        //      playerLevel = 0;
+        // if (playerLevel <= 0)
+        //     playerLevel = 0;
         // if (playerLevel.HasValue)
         //     playerLevel = 0;
         
@@ -53,12 +53,6 @@ public class PersistentData : MonoBehaviour
     {
         
     }
-
-    // public void DestroyPersistentData()
-    // {
-    //     Destroy(gameObject);
-    //     Debug.Log("Destroy(gameObject)");
-    // }
 
     public void SetName(string n)
     {

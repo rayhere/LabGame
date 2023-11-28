@@ -23,7 +23,7 @@ public class ScoreKeeper : MonoBehaviour
     private bool loadNextScene = false;
 
     public float loadNextSceneTimer = .8f;
-    public float ttime;
+    //public float ttime;
     private const float delay = .8f; // delay 0.8sec
 
     float elapsedTime;
@@ -135,10 +135,29 @@ public class ScoreKeeper : MonoBehaviour
 
     private void LoadNextScene()
     {
-        SceneManager.LoadScene("level1");
+        //method1
+        // SceneManager.LoadScene("level1");        
+        // Time.timeScale = 1;
 
+        //method2
+        //load level1 to level3 scene
+        //and will stay level3 scene if nextlevel is larger than 3
+        int nextlevel = PersistentData.Instance.GetLevel();
+        if (nextlevel > 3)
+        {
+            SceneManager.LoadScene("level3");
+            Time.timeScale = 1;
+        } 
+        else
+        {
+            //for laoding level1 and level2 scenes
+            string nextSceneName = "level" + nextlevel;
+            SceneManager.LoadScene(nextSceneName);
+            Time.timeScale = 1;
+        }
+
+        //old method
         //int scene = SceneManager.GetActiveScene().buildIndex;
         //SceneManager.LoadScene(scene, LoadSceneMode.Single);
-        Time.timeScale = 1;
     }
 }

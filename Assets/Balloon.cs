@@ -30,17 +30,6 @@ public class Balloon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //if (controller == null)
-        //{
-        //    controller = GameObject.FindGameObjectWithTag("GameController");
-        //}
-        //if (audio == null)
-        //{
-        //    audio = GetComponent<AudioSource>();
-        //}
-
-        //if (animator == null)
-        //    animator = GetComponent<Animator>();
         animator = GetComponent<Animator>();
         animator.SetInteger("popped", UNPOPPED);
 
@@ -57,8 +46,6 @@ public class Balloon : MonoBehaviour
 
         swingForce = Random.Range(10f, 20f);
         swingTime = .5f;
-
-        
     }
 
     // Update is called once per frame
@@ -91,73 +78,12 @@ public class Balloon : MonoBehaviour
                 timer += Time.time;
             }
         }
-        
-        //swingTime += Time.time;
-        // Debug.Log("swingTime" + swingTime);
-        // Debug.Log("Time.deltaTime" + Time.time);
-        // if (swingTime <= Time.time)
-        // {
-        //     Debug.Log("swingTime" + swingTime);
-        //     //change left or right
-        //     if (goLeft == 0)
-        //     {
-        //         thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce * (-5), 0));
-        //         goLeft += 1;
-        //         swingTime = 1+Time.time;
-        //     }
-        //     else if (goLeft == 1)
-        //     {
-        //         thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce * (10), 0));
-        //         goLeft += 1;
-        //         swingTime = 1+Time.time;
-        //     }
-        //     else if (goLeft == 2)
-        //     {
-        //         thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce * (-10), 0));
-        //         //goLeft += 1;
-        //         goLeft = 1;
-        //         swingTime = 1+Time.time;
-        //     }
-        //     else
-        //     {
-        //         // goLeft = 0;
-        //         // swingTime = 1+Time.time;
-        //     }
-            
-        // }
+
         BalloonMovement();
-        // if (maxScale.x > thisBalloon.transform.localScale.x)
-        // {
-        //     BalloonScale();
-        // }
-        // else
-        // {
-        //     canDestory = true;
-        //     animator.SetInteger("popped", POPPED);
-        //     timer += Time.time;
-        // }
-        
     }
 
     void OnTriggerEnter(Collider collision)
     {
-        //what should happen now?
-        //1. count the coins or increase score
-        //2.  play sound effect
-        //3. coin should disapper
-
-        //1. increase score
-        //controller.GetComponent<Scorekeeper>().AddPoints();
-
-        //2. play sound effect
-        //AudioSource.PlayClipAtPoint(audio.clip, transform.position);
-
-        //audio.Play() -- this will work but won't work if coin gets destroyed before audio is played.
-
-        //3. destroy coin
-        //Destroy(gameObject);
-
-
         //Detecting Collisions with a certain tag
 
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
@@ -183,76 +109,25 @@ public class Balloon : MonoBehaviour
                 //audio.Play() -- this will work but won't work if coin gets destroyed before audio is played.
 
                 canDestory = true;
-                //collisionTriggered = true;
 
                 // increase score
                 //gameController.GetComponent<ScoreKeeper>().AddPoints();
                 int rounded_f = (int)(thisBalloon.transform.localScale.x +0.5f);
-                gameController.GetComponent<ScoreKeeper>().AddPoints(4 - rounded_f);
+                gameController.GetComponent<ScoreKeeper>().AddPoints(6 - rounded_f);
             }
             Debug.Log("MyBullet collision detected");
         }
         else
         {
-            // if (!canDestory)
-            // {
-            //     animator.SetInteger("popped", POPPED);
-            //     Debug.Log("Popped: " + POPPED);
-
-            //     Debug.Log("timer: " + timer);
-            //     Debug.Log("deltaTime: " + Time.deltaTime);
-            //     Debug.Log("Time.time: " + Time.time);
-            
-            //     timer += Time.time;
-
-            //     Debug.Log("new timer: " + timer);
-
-            //     canDestory = true;
-            // }
+            //collision from other GameObject
             Debug.Log("collision detected");
         }
-
-        // if (!canDestory)
-        // {
-        //     animator.SetInteger("popped", POPPED);
-        //     Debug.Log("Popped: " + POPPED);
-
-        //     Debug.Log("timer: " + timer);
-        //     Debug.Log("deltaTime: " + Time.deltaTime);
-        //     Debug.Log("Time.time: " + Time.time);
-            
-        //     timer += Time.time;
-
-        //     Debug.Log("new timer: " + timer);
-
-        //     canDestory = true;
-        // }
-
-        // animator.SetInteger("popped", POPPED);
-        // Debug.Log("Popped: " + POPPED);
-
-        // Debug.Log("timer: " + timer);
-        // Debug.Log("deltaTime: " + Time.deltaTime);
-        // Debug.Log("Time.time: " + Time.time);
-        
-        // timer += Time.time;
-
-        // Debug.Log("new timer: " + timer);
-
-        // canDestory = true;
     }
 
     void BalloonMovement()
     {
-        
+        //add upward y.axis force
         thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(0, Random.Range(.001f, .01f)));
-        //thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2( 0, .001f));
-        // Vector3 position = new Vector3(Random.Range(xMin1, xMax1),Random.Range(yMin1,yMax1), 190);
-        //     if (position.y < 1.2 && position.x < -7)
-        //         position.x +=1;
-        //     if (position.y < 1.2 && position.x > 7)
-        //         position.x -=1;
-        //thisBalloon.GetComponent<Rigidbody>().AddForce(new Vector2(swingForce, 0));
 
         if (swingTime <= Time.time)
         {

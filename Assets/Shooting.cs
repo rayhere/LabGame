@@ -71,10 +71,6 @@ public class Shooting : MonoBehaviour
         }
         if (Input.GetMouseButton(0) && _newBall)
         {
-            //Vector3 newPos = _newBall.position;
-            //newPos.z += .55f;
-            //newPos.y += -.6f;
-
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             
@@ -87,37 +83,10 @@ public class Shooting : MonoBehaviour
             _lineRenderer.SetPosition(1, centerPos);
             Debug.Log("clicked");
         }
-
-            if (Input.GetMouseButton(0) && _newBall)
-        {
-            //Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCamLocal.WorldToScreenPoint(_newBall.position).z);
-            //Vector3 worldPos = mainCamLocal.ScreenToWorldPoint(pos);
-
-            //_newBall.position = new Vector3(worldPos.x, .25f, worldPos.z);
-
-            //Vector3 newPos = _newBall.position;
-            //newPos.z = .55f;
-            //newPos.y = .6f;
-            //_lineRenderer.SetPosition(1, newPos);
-        }
         else if (Input.GetMouseButtonUp(0)) //Release Mouse or Touch
         {
-            //Vector3 newPos = _newBall.position;
-            //newPos.z = 0f;
-            //newPos.y = 0.5f;
-            //_lineRenderer.SetPosition(1, newPos);
-
-            //_newBall.GetComponent<Rigidbody>().isKinematic = false;
-            //_newBall.GetComponent<Rigidbody>().AddForce(_newBall.forward * 1000);
-            //_newBall = null;
-            //shootingFire = true;
-            //Vector3 newPos = _newBall.position;
-            //newPos.z = 0f;
-            //newPos.y = 0.5f;
-            //_lineRenderer.SetPosition(1, newPos);
             shootingFire = true;
             Debug.Log("released");
-
         }
 
         if (TransPoint1 && TransPoint2)
@@ -163,21 +132,6 @@ public class Shooting : MonoBehaviour
 
             _lineRenderer.positionCount = 0;
         }
-        
-
-        //if (_newBall != null)
-        //{
-        //    Vector3 pos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCamLocal.WorldToScreenPoint(_newBall.position).z);
-        //    Vector3 worldPos = mainCamLocal.ScreenToWorldPoint(pos);
-        //    _newBall.position = new Vector3(worldPos.x, worldPos.y , worldPos.z);
-        //    Vector3 newPos = _newBall.position;
-        //    newPos.z = 0f;
-        //    //newPos.y = 0.5f;
-        //    _lineRenderer.SetPosition(1, newPos);
-        //}
-
-
-
     }
 
     void UpdateLineRenderer()

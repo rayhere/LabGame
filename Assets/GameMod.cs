@@ -18,6 +18,11 @@ public class GameMod : MonoBehaviour
 
     public static GameMod Modifier;
 
+    const float lowFireRate = .8f;
+    const float highFireRate = 1.2f;
+    const float shortTimeBonus = 1f;
+    const float longTimeBonus = 3f;
+
     void Awake()
     {
         if (Modifier == null)
@@ -36,9 +41,9 @@ public class GameMod : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bonusTime = 3f;
-        bonusFireRate = .5f;
-        bonusLife = 0;   
+        bonusTime = longTimeBonus;
+        bonusFireRate = lowFireRate;
+        //bonusLife = 0;   
     }
 
     // Update is called once per frame
@@ -51,13 +56,13 @@ public class GameMod : MonoBehaviour
     {
         if (isBonusTime)
         {
-            Debug.Log("bonusTime = 3f");
-            bonusTime = 3f;
+            //Debug.Log("bonusTime = longTimeBonus");
+            bonusTime = longTimeBonus;
         }
         else
         {
-            Debug.Log("bonusTime = 0f");
-            bonusTime = 1f;
+            //Debug.Log("bonusTime = shortTimeBonus");
+            bonusTime = shortTimeBonus;
         }
     }
 
@@ -65,11 +70,11 @@ public class GameMod : MonoBehaviour
     {
         if (isBonusFireRate)
         {
-            bonusFireRate = 1f;
+            bonusFireRate = highFireRate;
         }
         else
         {
-            bonusFireRate = .5f;
+            bonusFireRate = lowFireRate;
         }
     }
 

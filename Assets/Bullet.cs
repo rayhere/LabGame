@@ -151,27 +151,6 @@ public class Bullet : MonoBehaviour
         if (RgbBullet.transform.localScale.x > 0 || RgbBullet.transform.localScale.y > 0)
         {
             RgbBullet.transform.localScale += scaleChange;
-            
         }
-        // if (Trail.transform.localScale.x > 0 || Trail.transform.localScale.y > 0)
-        // {
-        //     Trail.transform.localScale += scaleChange;
-        //     Trail.GetComponent<TrailRenderer>().width -= 0.01;
-            
-        // }
-        // if (Trail.startWidth >= 0)
-        // {
-        //     Trail.startWidth -= 0.01f;
-        // }
-
-        //Trail.transform.Translate(0,0,0);
-        //Trail.Width -= 0.01;
-
-
-        //Trail.GetComponent<TrailRenderer>().width -= 0.01;
-        // if (thisBullet.transform.localScale.x > 0 || thisBullet.transform.localScale.y > 0)
-        // {
-        //     thisBullet.transform.localScale += scaleChange;
-        // }
     }
 }

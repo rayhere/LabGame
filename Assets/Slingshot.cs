@@ -14,7 +14,7 @@ public class Slingshot : MonoBehaviour
 
     [SerializeField] private GameObject BallPrefab;
 
-    [SerializeField] private int rubberPower;
+    //[SerializeField] private int rubberPower;
 
     [SerializeField] Vector3 centerPos;
 
@@ -26,20 +26,20 @@ public class Slingshot : MonoBehaviour
 
     private float timeFire;
     private float nextTimeFire;
-    private bool timeForFire;
+    //private bool timeForFire;
 
     private LineRenderer _lineRenderer;
     public GameObject _newBall;
     private Camera mainCamLocal;
     private bool shootingFire = false;
-    private int rPower = 0;
+    //private int rPower = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = 2;
-        rubberPower = rPower;
+        //rubberPower = rPower;
         Debug.Log("rigid.position.x: " + rigid.position.x);
         Debug.Log("rigid.position.y: " + rigid.position.y);
 
@@ -52,7 +52,7 @@ public class Slingshot : MonoBehaviour
         // read firerate
         firerate = GameMod.Modifier.GetBonusFireRate();
 
-        timeForFire = true;
+        //timeForFire = true;
     }
 
     // Update is called once per frame
@@ -75,82 +75,64 @@ public class Slingshot : MonoBehaviour
         if (timeFire >= nextTimeFire)
         {
             //timeForFire = true;
-        
 
-        //generate new ball
-        if (Input.GetMouseButtonDown(0) && _newBall == null)
-        {
-            _newBall = Instantiate(BallPrefab, Vector3.zero, Quaternion.identity);
-
-            if (_newBall)
+            //generate new ball
+            if (Input.GetMouseButtonDown(0) && _newBall == null)
             {
-                //add 3rd Point in the Middle..
-                if (_lineRenderer.positionCount < 3)
-                    _lineRenderer.positionCount = 3;
+                _newBall = Instantiate(BallPrefab, Vector3.zero, Quaternion.identity);
 
-                Vector3 newPos = _newBall.transform.position;
-                newPos.z = -9f;
-                newPos.y += .2f;
-                //newPos.y = -.2f;
+                if (_newBall)
+                {
+                    //add 3rd Point in the Middle..
+                    if (_lineRenderer.positionCount < 3)
+                        _lineRenderer.positionCount = 3;
 
-                _lineRenderer.SetPosition(1, newPos);
+                    Vector3 newPos = _newBall.transform.position;
+                    newPos.z = -9f;
+                    newPos.y += .2f;
+                    //newPos.y = -.2f;
+
+                    _lineRenderer.SetPosition(1, newPos);
+                }
             }
-        }
-        if (Input.GetMouseButton(0) && _newBall)
-        {
-            //Vector3 newPos = _newBall.position;
-            //newPos.z += .55f;
-            //newPos.y += -.6f;
-
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-
-            centerPos = new Vector3(worldPosition.x, worldPosition.y, worldPosition.z + 5f);
-            //Vector3 pos = new Vector3
-            //    (Input.mousePosition.x, Input.mousePosition.y, -10f);
-
-            _newBall.transform.position = new Vector3(worldPosition.x, worldPosition.y + .2f, -5.8f);
-
-            _lineRenderer.SetPosition(1, centerPos);
-            //Debug.Log("clicked");
-        }
-
-        if (Input.GetMouseButton(0) && _newBall)
-        {
-          
-        }
-        else if (Input.GetMouseButtonUp(0) && _newBall) //Release Mouse or Touch
-        {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            if (mousePos.x > rigid.position.x - 1.5 && mousePos.x < rigid.position.x + 1.5 && mousePos.y < rigid.position.y + 1.4 && mousePos.y > rigid.position.y - 2)
+            if (Input.GetMouseButton(0) && _newBall)
             {
-                shootingFire = true;
-                Debug.Log("released");
+                //Vector3 newPos = _newBall.position;
+                //newPos.z += .55f;
+                //newPos.y += -.6f;
+
+                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                centerPos = new Vector3(worldPosition.x, worldPosition.y, worldPosition.z + 5f);
+                //Vector3 pos = new Vector3
+                //    (Input.mousePosition.x, Input.mousePosition.y, -10f);
+
+                _newBall.transform.position = new Vector3(worldPosition.x, worldPosition.y + .2f, -5.8f);
+
+                _lineRenderer.SetPosition(1, centerPos);
+                //Debug.Log("clicked");
             }
-            else
+
+            if (Input.GetMouseButton(0) && _newBall)
             {
-                _lineRenderer.positionCount = 2;
-                Destroy(_newBall);
-                Debug.Log("reset _LineRenderer");
-            }
             
-        }
+            }
+            else if (Input.GetMouseButtonUp(0) && _newBall) //Release Mouse or Touch
+            {
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-
-        //}
-        //else
-        //{
-            //Debug.Log("mousePos.x: " + mousePos.x + "; mousePos.y: " + mousePos.y + "; rigid.position.x: " + rigid.position.x + "; rigid.position.y: " + rigid.position.y);
-            //mousePos.x > rigid.position.x - 1.5 && mousePos.x < rigid.position.x + 1.5 && mousePos.y < rigid.position.y + 1.4 && mousePos.y > rigid.position.y -2
-            //out of zone, reset
-            //_lineRenderer.positionCount = 2;
-            //if (shootingFire == false)
-            //{
-            //    //Destroy(_newBall);
-            //}
-            
-        //}
+                if (mousePos.x > rigid.position.x - 1.5 && mousePos.x < rigid.position.x + 1.5 && mousePos.y < rigid.position.y + 1.4 && mousePos.y > rigid.position.y - 2)
+                {
+                    shootingFire = true;
+                    Debug.Log("released");
+                }
+                else
+                {
+                    _lineRenderer.positionCount = 2;
+                    Destroy(_newBall);
+                    Debug.Log("reset _LineRenderer");
+                }
+            }
         }
         if (TransPoint1 && TransPoint2)
         {
