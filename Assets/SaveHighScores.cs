@@ -40,7 +40,6 @@ public class SaveHighScores : MonoBehaviour
             string currentNameKey = NAME_KEY + i;
             string currentScoreKey = SCORE_KEY + i;
 
-
             //first check if there is a high scoring player
             //PlayerPrefs store 3 type of data (Float, Int, String)
             //1st try to see if TopScore1 has key
@@ -54,7 +53,6 @@ public class SaveHighScores : MonoBehaviour
                 //then check if player's score is greater than existing high score
                 int currentScore = PlayerPrefs.GetInt(currentScoreKey);
 
-
                 if (playerScore > currentScore)
                 {
                     //swap all the key to next level, start from this level
@@ -65,7 +63,6 @@ public class SaveHighScores : MonoBehaviour
                     PlayerPrefs.SetString(currentNameKey, playerName);
                     return;
                 }
-                
             }
             //if 1st try TopScore1 is null, set value to current Key TopScore1
             else
@@ -75,7 +72,6 @@ public class SaveHighScores : MonoBehaviour
                 return;
             }
         }
-
     }
 
     void swap(int j)

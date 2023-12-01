@@ -9,6 +9,7 @@ public class Slingshot : MonoBehaviour
     [SerializeField] private Transform TransPoint1;
     [SerializeField] private Transform TransPoint2;
     [SerializeField] private Rigidbody2D rigid;
+    [SerializeField] Collider2D rigidBackground;
 
     [SerializeField] private Transform bulletSpawnPoint; // bulletSpawnPoint
 
@@ -32,6 +33,21 @@ public class Slingshot : MonoBehaviour
     public GameObject _newBall;
     private Camera mainCamLocal;
     private bool shootingFire = false;
+
+    //status drag or aim
+    //if drag is true, then aim will always stop
+    private bool drag = false;
+
+    private Transform dragging = null;
+
+    //https://gamedevbeginner.com/how-to-move-an-object-with-the-mouse-in-unity-in-2d/
+    public GameObject selectedObject;
+    private Vector3 offset;
+
+    public GameObject[] ravens;
+
+    private bool phototype = false;
+
     //private int rPower = 0;
 
     // Start is called before the first frame update
@@ -76,8 +92,92 @@ public class Slingshot : MonoBehaviour
         {
             //timeForFire = true;
 
+            //check if mousepos is trying to drag slingslot 
+            //if (Input.GetMouseButtonDown(0) && _newBall == null && isOnBottomSlingshot())
+            if (Input.GetMouseButton(0) && _newBall == null && isOnBottomSlingshot() && phototype)
+            {
+                //if mouse holding
+
+
+                //rigid.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+
+                //https://www.youtube.com/watch?v=izag_ZHwOtM
+                //Cast our own ray
+                // RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                // if (hit){
+                //     // If we hit, record the transform of the object we hit.
+                //     dragging = hit.transform;
+                //     // And record the offset.
+                //     offset = dragging.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                // }
+
+                //https://gamedevbeginner.com/how-to-move-an-object-with-the-mouse-in-unity-in-2d/
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    //Collider2D targetObject = Physics2D.OverlapPoint(mousePosition);
+                    //Rigidbody2D targetObject = rigidBackground;
+
+                    // GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+                    // foreach(GameObject obst in obstacles)
+                    //     obst.GetComponent<RigidBody>().useGravity = false;
+
+                    //GameObject[] ravens = GameObject.FindGameObjectsWithTag("Raven");
+                    ravens = GameObject.FindGameObjectsWithTag("Raven");
+                    foreach(GameObject raven in ravens)
+                    {
+                        //raven = targetObject.transform.gameObject;
+                        offset = raven.transform.position - mousePosition;
+                    }
+                        
+            
+                    Collider2D targetObject = rigidBackground;
+                    if (targetObject)
+                    {
+                        selectedObject = targetObject.transform.gameObject;
+                        offset = selectedObject.transform.position - mousePosition;
+                    }
+                }
+                foreach(GameObject raven in ravens)
+                {
+                    if (raven)
+                    {
+                        raven.transform.position = mousePosition + offset;
+                    }
+                    // if (Input.GetMouseButtonUp(0) && raven)
+                    // {
+                    //     raven = null;
+                    // }
+                }
+                
+                if (Input.GetMouseButtonUp(0))
+                {
+                    //ravens.Clear();
+                    // foreach(GameObject raven in ravens)
+                    //     raven.Clear();
+                    ravens = null;
+                }
+                
+                if (selectedObject)
+                {
+                    selectedObject.transform.position = mousePosition + offset;
+                }
+                if (Input.GetMouseButtonUp(0) && selectedObject)
+                {
+                    selectedObject = null;
+                }
+
+            }
+            // else if (Input.GetMouseButtonUp(0) && _newBall == null && drag)
+            // {
+            //     // Stop dragging.
+            //     drag = false;
+            //     dragging = null;
+            // }
+
             //generate new ball
-            if (Input.GetMouseButtonDown(0) && _newBall == null && isOnTopSlingshot())
+            else if (Input.GetMouseButtonDown(0) && _newBall == null && isOnTopSlingshot())
             {
                 _newBall = Instantiate(BallPrefab, Vector3.zero, Quaternion.identity);
 
@@ -95,7 +195,8 @@ public class Slingshot : MonoBehaviour
                     _lineRenderer.SetPosition(1, newPos);
                 }
             }
-            if (Input.GetMouseButton(0) && _newBall)
+
+            else if (Input.GetMouseButton(0) && _newBall)
             {
                 //Vector3 newPos = _newBall.position;
                 //newPos.z += .55f;
@@ -113,10 +214,10 @@ public class Slingshot : MonoBehaviour
                 //Debug.Log("clicked");
             }
 
-            if (Input.GetMouseButton(0) && _newBall)
-            {
+            // if (Input.GetMouseButton(0) && _newBall)
+            // {
             
-            }
+            // }
             else if (Input.GetMouseButtonUp(0) && _newBall) //Release Mouse or Touch
             {
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -139,7 +240,26 @@ public class Slingshot : MonoBehaviour
             _lineRenderer.SetPosition(0, TransPoint1.position);
             _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, TransPoint2.position);
         }
+
+        // if (dragging != null)
+        // {
+        //     // Move object, taking into account original offset
+        //     //dragging.position = Camera.main.ScreenToWorldPoint(Input.mousePosition)+offset;
+
+            
+        // }
+
+        //https://gamedevbeginner.com/how-to-move-an-object-with-the-mouse-in-unity-in-2d/
+        // if (selectedObject)
+        // {
+        //     selectedObject.transform.position = mousePosition + offset;
+        // }
+        // if (Input.GetMouseButtonUp(0) && selectedObject)
+        // {
+        //     selectedObject = null;
+        // }
     }
+
 
     //can be called potentially many times per frame -- best for physics
     void FixedUpdate()
@@ -210,8 +330,6 @@ public class Slingshot : MonoBehaviour
         //    _lineRenderer.SetPosition(1, newPos);
         //}
 
-        
-
 
 
     }
@@ -236,4 +354,28 @@ public class Slingshot : MonoBehaviour
             // Debug.Log("reset _LineRenderer");
         }
     }
+
+    bool isOnBottomSlingshot()
+    {
+        //check if mouse click on handle part of slingshot
+        //so it tell if allow to drag and move slingshot
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //left limit, right limit, top limit, bottom limit
+        //if (mousePos.x > rigid.position.x - 1.5 && mousePos.x < rigid.position.x + 1.5 && mousePos.y < rigid.position.y + 1.4 && mousePos.y > rigid.position.y - 0)
+        if (mousePos.y < rigid.position.y + 0) //just below the center the slingshot
+        {
+            drag = true;
+            return true;
+            //Debug.Log("released");
+        }
+        else
+        {
+            drag = false;
+            return false;
+            // _lineRenderer.positionCount = 2;
+            // Destroy(_newBall);
+            // Debug.Log("reset _LineRenderer");
+        }
+    }
+
 }

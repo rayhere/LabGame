@@ -46,6 +46,17 @@ public class Balloon : MonoBehaviour
 
         swingForce = Random.Range(10f, 20f);
         swingTime = .5f;
+
+        //increase Balloon swingForce depend on level
+        int sceneLevel = PersistentData.Instance.GetLevel();
+        if (sceneLevel > 0)
+        {
+            swingForce = swingForce + PersistentData.Instance.GetLevel();;
+        }
+        else
+        {
+            
+        }
     }
 
     // Update is called once per frame

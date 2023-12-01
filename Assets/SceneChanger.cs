@@ -45,4 +45,10 @@ public class SceneChanger : MonoBehaviour
         //PersistentData.DestoryPersistentData; 
         //PersistentData.Instance.GetName();
     }
+
+    public void HighScores()
+    {
+        SceneManager.LoadScene("highscores");
+        Time.timeScale = 1;
+    }
 }
