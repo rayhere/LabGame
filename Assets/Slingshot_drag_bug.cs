@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slingshot : MonoBehaviour
+public class Slingshot_drag_bug : MonoBehaviour
 {
     [Header("Rope Settings")]
     //TransPoint from 3D Object

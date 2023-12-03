@@ -54,6 +54,13 @@ public class PersistentData : MonoBehaviour
         
     }
 
+    public void ResetPlayer()
+    {
+        playerName = null;
+        playerLevel = 1;
+        playerScore = 0;
+        remainingTime = 30;
+    }
     public void SetName(string n)
     {
         playerName = n;

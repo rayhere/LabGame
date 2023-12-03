@@ -25,6 +25,7 @@ public class SaveHighScores : MonoBehaviour
 
         SaveScore();
         ViewScores();
+        PersistentData.Instance.ResetPlayer();
     }
 
     // Update is called once per frame
